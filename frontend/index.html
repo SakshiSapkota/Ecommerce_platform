@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="SajhaMart - Premium products for researchers and developers. Electronics, books, clothing and home.">
+  <title>SajhaMart - Gear for the Curious Mind</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="home-page">
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Sajha<span class="ac">Mart</span></a>
+    <div class="nav-links">
+      <a href="index.html"    class="nav-link active">Home</a>
+      <a href="products.html" class="nav-link">Products</a>
+      <a href="wishlist.html" class="nav-link">Wishlist</a>
+      <a href="orders.html"   class="nav-link">Orders</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-cart" onclick="toggleCart()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge">0</span>
+      </button>
+      <div class="user-menu" id="user-menu">
+        <button class="btn-user" onclick="toggleUserMenu()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="js-user-name">Account</span>
+        </button>
+        <div class="user-dropdown" id="user-dropdown">
+          <div class="js-logged-out">
+            <a href="login.html"    class="dropdown-item">Sign In</a>
+            <a href="register.html" class="dropdown-item">Register</a>
+          </div>
+          <div class="js-logged-in" style="display:none">
+            <div class="dropdown-header js-greeting"></div>
+            <div class="dropdown-divider"></div>
+            <a href="account.html"  class="dropdown-item">My Account</a>
+            <a href="orders.html"   class="dropdown-item">My Orders</a>
+            <a href="wishlist.html" class="dropdown-item">Wishlist</a>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item" onclick="logout()">Sign Out</button>
+          </div>
+        </div>
+      </div>
+      <button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<aside class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-head">
+    <h3>Shopping Cart</h3>
+    <button class="cart-close" onclick="toggleCart()">x</button>
+  </div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="cart-empty-box" id="cart-empty">
+    <div class="icon">Cart</div><p>Your cart is empty</p>
+    <a href="products.html" class="btn btn-primary btn-sm">Browse Products</a>
+  </div>
+  <div class="cart-foot" id="cart-foot" style="display:none;flex-direction:column;gap:.875rem">
+    <div class="cart-total-row"><span>Subtotal</span><strong id="cart-total">$0.00</strong></div>
+    <a href="checkout.html" class="btn btn-primary btn-full">Checkout -></a>
+    <button onclick="clearCart()" class="btn btn-ghost btn-full">Clear Cart</button>
+  </div>
+</aside>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-badge">New Arrivals Latest</div>
+      <h1 class="hero-title">Gear for the<br><span class="g">Curious Mind</span></h1>
+      <p class="hero-desc">Premium electronics, books, and essentials curated for researchers, developers and learners.</p>
+      <div class="hero-cta">
+        <a href="products.html" class="btn btn-primary btn-lg">Shop Now -></a>
+        <a href="products.html?category=Books" class="btn btn-secondary btn-lg">Browse Books</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-val" id="h-products">16+</span><span class="hero-stat-lbl">Products</span></div>
+        <div class="hero-stat"><span class="hero-stat-val">4.8 stars</span><span class="hero-stat-lbl">Avg Rating</span></div>
+        <div class="hero-stat"><span class="hero-stat-val">Free</span><span class="hero-stat-lbl">Ship $50+</span></div>
+      </div>
+    </div>
+    <div class="hero-cards">
+      <div class="preview-card"><div class="preview-img">HP</div><div><div class="preview-label">Best Seller</div><div class="preview-name">Noise-Cancelling Headphones</div><div class="preview-price">$149.99</div></div></div>
+      <div class="preview-card"><div class="preview-img">BK</div><div><div class="preview-label">4.9 Rated</div><div class="preview-name">Clean Code: A Handbook</div><div class="preview-price">$39.99</div></div></div>
+      <div class="preview-card"><div class="preview-img">SSD</div><div><div class="preview-label">New</div><div class="preview-name">Portable SSD 1TB</div><div class="preview-price">$109.99</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div><h2 class="section-title">Shop by Category</h2><p class="section-sub">Find exactly what you need</p></div>
+      <a href="products.html" class="section-link">View all -></a>
+    </div>
+    <div class="categories-grid" id="categories-grid">
+      <!-- Loaded dynamically from API -->
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <div><h2 class="section-title">Featured Products</h2><p class="section-sub">Hand-picked for you</p></div>
+      <a href="products.html" class="section-link">See all -></a>
+    </div>
+    <div class="products-grid" id="featured-grid">
+      <div class="skeleton"></div><div class="skeleton"></div>
+      <div class="skeleton"></div><div class="skeleton"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO -->
+<section class="section"><div class="container">
+  <div class="promo-strip">
+    <div><h3>Free Shipping on Orders Over $50</h3><p>Plus free 30-day returns. No questions asked.</p></div>
+    <a href="products.html" class="btn btn-primary">Shop Now -></a>
+  </div>
+</div></section>
+
+<!-- ANALYTICS -->
+<section class="section section-alt"><div class="container">
+  <div class="section-head"><div><h2 class="section-title">Store Overview</h2><p class="section-sub">Simulated analytics</p></div></div>
+  <div class="analytics-strip">
+    <div class="analytics-card"><div class="analytics-emoji">Users</div><div class="analytics-val" id="a-users">-</div><div class="analytics-lbl">Users</div></div>
+    <div class="analytics-card"><div class="analytics-emoji">Orders</div><div class="analytics-val" id="a-orders">-</div><div class="analytics-lbl">Orders</div></div>
+    <div class="analytics-card"><div class="analytics-emoji">Revenue</div><div class="analytics-val" id="a-revenue">-</div><div class="analytics-lbl">Revenue</div></div>
+    <div class="analytics-card"><div class="analytics-emoji">Products</div><div class="analytics-val" id="a-products">-</div><div class="analytics-lbl">Products</div></div>
+  </div>
+</div></section>
+
+<footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div><div class="footer-logo">Sajha<span class="ac">Mart</span></div><p>Premium gear for researchers, developers and curious minds.</p></div>
+    <div class="footer-col"><h4>Shop</h4><a href="products.html?category=Electronics">Electronics</a><a href="products.html?category=Books">Books</a><a href="products.html?category=Clothing">Clothing</a><a href="products.html?category=Home">Home</a></div>
+    <div class="footer-col"><h4>Account</h4><a href="login.html">Sign In</a><a href="register.html">Register</a><a href="orders.html">My Orders</a><a href="wishlist.html">Wishlist</a></div>
+    <div class="footer-col"><h4>Info</h4><a href="#">About</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 SajhaMart - Online Shopping Platform</span><span>Python + SQLite + Vanilla JS</span></div>
+</div></footer>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script>
+async function loadHome() {
+  // Load categories with cover images
+  const cats = await API.get('/api/categories');
+  const categories = cats.categories || [];
+  const d = await API.get('/api/products');
+  const ps = d.products || [];
+  
+  // Category counts
+  const counts = {};
+  ps.forEach(p => counts[p.category] = (counts[p.category]||0)+1);
+  
+  // Render category cards with cover images
+  const grid = document.getElementById('categories-grid');
+  if (grid) {
+    grid.innerHTML = categories.map(cat => `
+      <a href="products.html?category=${encodeURIComponent(cat.name)}" class="cat-card">
+        <div class="cat-image">${cat.cover_image && cat.cover_image.startsWith('/uploads/') ? `<img src="${cat.cover_image}" alt="${cat.name}" style="width:100%;height:100%;object-fit:cover">` : '<span style="opacity:0.3">Folder</span>'}</div>
+        <div class="cat-info">
+          <div class="cat-name">${cat.name}</div>
+          <div class="cat-count">${counts[cat.name] || 0} items</div>
+        </div>
+      </a>
+    `).join('');
+  }
+  const hp = document.getElementById('h-products');
+  if (hp) hp.textContent = ps.length + '+';
+  // Featured (first 8)
+  const grid2 = document.getElementById('featured-grid');
+  if (grid2) grid2.innerHTML = ps.slice(0,8).map(p => renderProductCard(p)).join('');
+  // Analytics
+  const a = await API.get('/api/analytics');
+  if (a.success) {
+    const s = a.stats;
+    document.getElementById('a-users').textContent    = s.total_users;
+    document.getElementById('a-orders').textContent   = s.total_orders;
+    document.getElementById('a-revenue').textContent  = '$'+s.revenue.toFixed(2);
+    document.getElementById('a-products').textContent = s.total_products;
+  }
+}
+loadHome();
+</script>
+</body>
+</html>

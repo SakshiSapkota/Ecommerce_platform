@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sign In - SajhaMart</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="auth-page">
+<nav class="navbar"><div class="nav-inner"><a href="index.html" class="nav-logo">Sajha<span class="ac">Mart</span></a></div></nav>
+
+<div class="auth-wrap" style="padding-top:var(--nav-h)">
+  <div class="auth-form-side">
+    <a href="index.html" class="auth-logo">Sajha<span class="ac">Mart</span></a>
+    <h1 class="auth-title">Welcome back</h1>
+    <p class="auth-sub">Sign in to your SajhaMart account</p>
+
+    <div class="alert alert-error" id="global-err" style="display:none"></div>
+
+    <form id="login-form" novalidate>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <div class="input-wrap">
+          <span class="input-icon">📧</span>
+          <input class="form-input" type="email" id="email" placeholder="you@example.com">
+        </div>
+        <span class="form-error-msg" id="e-email"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <div class="input-wrap" style="position:relative">
+          <span class="input-icon">🔒</span>
+          <input class="form-input" type="password" id="password" placeholder="Your password">
+          <button type="button" class="pw-toggle" onclick="togglePasswordVisibility('password',this)">👁</button>
+        </div>
+        <span class="form-error-msg" id="e-pw"></span>
+      </div>
+      <div style="text-align:right;margin-bottom:1.25rem">
+        <a href="forgot-password.html" style="font-size:.875rem;color:var(--primary)">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full btn-lg" id="submit-btn">Sign In →</button>
+    </form>
+
+    <div class="auth-switch">Don't have an account? <a href="register.html">Create one free</a></div>
+    <a href="index.html" class="back-site">← Back to store</a>
+  </div>
+
+  <div class="auth-visual">
+    <div class="auth-visual-inner">
+      <h2>"Good tools make great work possible."</h2>
+      <p>Join researchers and developers shopping smarter at SajhaMart.</p>
+      <div class="auth-feats">
+        <div class="auth-feat"><div class="feat-dot">✓</div>Free shipping over $50</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>30-day returns</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>Order history & tracking</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>Wishlist & favourites</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/login.js"></script>
+</body></html>

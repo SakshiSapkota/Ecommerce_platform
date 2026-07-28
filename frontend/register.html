@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Register - SajhaMart</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="auth-page">
+<nav class="navbar"><div class="nav-inner"><a href="index.html" class="nav-logo">Sajha<span class="ac">Mart</span></a></div></nav>
+
+<div class="auth-wrap" style="padding-top:var(--nav-h)">
+  <div class="auth-form-side">
+    <a href="index.html" class="auth-logo">Sajha<span class="ac">Mart</span></a>
+    <h1 class="auth-title">Create account</h1>
+    <p class="auth-sub">Free forever. No credit card needed.</p>
+
+    <div class="alert alert-error" id="global-err" style="display:none"></div>
+
+    <form id="register-form" novalidate>
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <div class="input-wrap"><span class="input-icon">👤</span>
+          <input class="form-input" type="text" id="name" placeholder="Jane Doe"></div>
+        <span class="form-error-msg" id="e-name"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <div class="input-wrap"><span class="input-icon">📧</span>
+          <input class="form-input" type="email" id="email" placeholder="you@example.com"></div>
+        <span class="form-error-msg" id="e-email"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <div class="input-wrap" style="position:relative"><span class="input-icon">🔒</span>
+          <input class="form-input" type="password" id="password" placeholder="At least 6 characters">
+          <button type="button" class="pw-toggle" onclick="togglePasswordVisibility('password',this)">👁</button></div>
+        <div class="pw-strength"><div class="pw-strength-bar" id="pw-bar" style="width:0"></div></div>
+        <span class="form-error-msg" id="e-pw"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm Password</label>
+        <div class="input-wrap" style="position:relative"><span class="input-icon">🔒</span>
+          <input class="form-input" type="password" id="confirm-pw" placeholder="Repeat password">
+          <button type="button" class="pw-toggle" onclick="togglePasswordVisibility('confirm-pw',this)">👁</button></div>
+        <span class="form-error-msg" id="e-cpw"></span>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full btn-lg" id="submit-btn">Create Account →</button>
+    </form>
+
+    <div class="auth-switch">Already have an account? <a href="login.html">Sign in</a></div>
+    <a href="index.html" class="back-site">← Back to store</a>
+  </div>
+
+  <div class="auth-visual">
+    <div class="auth-visual-inner">
+      <h2>"Science is built on good tools."</h2>
+      <p>Create your free account and start exploring curated products.</p>
+      <div class="auth-feats">
+        <div class="auth-feat"><div class="feat-dot">✓</div>Track all your orders</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>Save items to wishlist</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>Faster checkout</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>Exclusive member deals</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/register.js"></script>
+</body></html>

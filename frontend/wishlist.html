@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Wishlist - SajhaMart</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<nav class="navbar" id="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo">Sajha<span class="ac">Mart</span></a>
+  <div class="nav-links"><a href="index.html" class="nav-link">Home</a><a href="products.html" class="nav-link">Products</a><a href="wishlist.html" class="nav-link active">Wishlist</a><a href="orders.html" class="nav-link">Orders</a></div>
+  <div class="nav-actions">
+    <button class="btn-cart" onclick="toggleCart()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span class="cart-badge">0</span></button>
+    <div class="user-menu" id="user-menu"><button class="btn-user" onclick="toggleUserMenu()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="js-user-name">Account</span></button>
+    <div class="user-dropdown" id="user-dropdown"><div class="js-logged-out"><a href="login.html" class="dropdown-item">Sign In</a><a href="register.html" class="dropdown-item">Register</a></div><div class="js-logged-in" style="display:none"><div class="dropdown-header js-greeting"></div><div class="dropdown-divider"></div><a href="account.html" class="dropdown-item">My Account</a><div class="dropdown-divider"></div><button class="dropdown-item" onclick="logout()">Sign Out</button></div></div></div>
+  </div>
+</div></nav>
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<aside class="cart-sidebar" id="cart-sidebar"><div class="cart-head"><h3>Shopping Cart</h3><button class="cart-close" onclick="toggleCart()">✕</button></div><div class="cart-body" id="cart-body"></div><div class="cart-empty-box" id="cart-empty"><div class="icon">🛒</div><p>Cart is empty</p></div><div class="cart-foot" id="cart-foot" style="display:none;flex-direction:column;gap:.875rem"><div class="cart-total-row"><span>Subtotal</span><strong id="cart-total">$0.00</strong></div><a href="checkout.html" class="btn btn-primary btn-full">Checkout →</a></div></aside>
+
+<div class="page-hero"><div class="container"><h1>My Wishlist</h1><p>Items you've saved for later</p></div></div>
+<div class="container" style="padding:2.5rem 1.5rem;min-height:60vh">
+  <div class="empty-state" id="auth-req" style="display:none"><div class="empty-icon">🔒</div><div class="empty-title">Sign in to view wishlist</div><a href="login.html" class="btn btn-primary" style="margin-top:1rem">Sign In</a></div>
+  <div id="wish-content">
+    <div class="products-grid" id="wish-grid"></div>
+    <div class="empty-state" id="no-wish" style="display:none"><div class="empty-icon">💛</div><div class="empty-title">Your wishlist is empty</div><div class="empty-desc">Click the ♡ on any product to save it here.</div><a href="products.html" class="btn btn-primary">Browse Products</a></div>
+  </div>
+</div>
+<footer class="footer"><div class="container"><div class="footer-bottom" style="border-top:none;padding:1.5rem 0"><span>© 2025 SajhaMart</span></div></div></footer>
+<script src="js/api.js"></script><script src="js/cart.js"></script><script src="js/auth.js"></script><script src="js/wishlist.js"></script>
+</body></html>

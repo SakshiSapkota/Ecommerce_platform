@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Browse all products at SajhaMart">
+  <title>Products - SajhaMart</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Sajha<span class="ac">Mart</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link active">Products</a>
+      <a href="wishlist.html" class="nav-link">Wishlist</a>
+      <a href="orders.html" class="nav-link">Orders</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-cart" onclick="toggleCart()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge">0</span>
+      </button>
+      <div class="user-menu" id="user-menu">
+        <button class="btn-user" onclick="toggleUserMenu()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="js-user-name">Account</span>
+        </button>
+        <div class="user-dropdown" id="user-dropdown">
+          <div class="js-logged-out"><a href="login.html" class="dropdown-item">Sign In</a><a href="register.html" class="dropdown-item">Register</a></div>
+          <div class="js-logged-in" style="display:none">
+            <div class="dropdown-header js-greeting"></div><div class="dropdown-divider"></div>
+            <a href="account.html" class="dropdown-item">My Account</a>
+            <a href="orders.html" class="dropdown-item">My Orders</a>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item" onclick="logout()">Sign Out</button>
+          </div>
+        </div>
+      </div>
+      <button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<aside class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-head"><h3>Shopping Cart</h3><button class="cart-close" onclick="toggleCart()">✕</button></div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="cart-empty-box" id="cart-empty"><div class="icon">🛒</div><p>Cart is empty</p></div>
+  <div class="cart-foot" id="cart-foot" style="display:none;flex-direction:column;gap:.875rem">
+    <div class="cart-total-row"><span>Subtotal</span><strong id="cart-total">$0.00</strong></div>
+    <a href="checkout.html" class="btn btn-primary btn-full">Checkout →</a>
+    <button onclick="clearCart()" class="btn btn-ghost btn-full">Clear Cart</button>
+  </div>
+</aside>
+
+<div class="page-hero"><div class="container">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Products</span></div>
+  <h1>All Products</h1>
+  <p>Discover our collection of <span id="total-count">-</span> products</p>
+</div></div>
+
+<div class="shop-layout">
+  <aside class="filters-panel">
+    <div class="filter-section">
+      <div class="filter-title">Search</div>
+      <div class="search-wrap">
+        <svg class="si" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="search-in" placeholder="Search products…" oninput="debounceFilter()">
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-title">Category</div>
+      <div class="cat-pills">
+        <button class="cat-pill active" data-cat="All"         onclick="selectCat(this,'All')">All Products</button>
+        <button class="cat-pill"        data-cat="Electronics" onclick="selectCat(this,'Electronics')">⚡ Electronics</button>
+        <button class="cat-pill"        data-cat="Books"       onclick="selectCat(this,'Books')">📚 Books</button>
+        <button class="cat-pill"        data-cat="Clothing"    onclick="selectCat(this,'Clothing')">👕 Clothing</button>
+        <button class="cat-pill"        data-cat="Home"        onclick="selectCat(this,'Home')">🏠 Home</button>
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-title">Price Range</div>
+      <div class="price-inputs">
+        <input type="number" id="min-price" placeholder="Min $" min="0" oninput="debounceFilter()">
+        <span style="color:var(--text-light)">-</span>
+        <input type="number" id="max-price" placeholder="Max $" min="0" oninput="debounceFilter()">
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-title">Sort By</div>
+      <select class="sort-sel" id="sort-sel" onchange="applyFilters()">
+        <option value="">Featured</option>
+        <option value="price_asc">Price: Low → High</option>
+        <option value="price_desc">Price: High → Low</option>
+        <option value="rating">Highest Rated</option>
+        <option value="name">Name A–Z</option>
+      </select>
+    </div>
+    <button onclick="clearFilters()" class="btn btn-ghost btn-full" style="margin-top:.5rem">Clear Filters</button>
+  </aside>
+
+  <main class="shop-main">
+    <div class="shop-toolbar">
+      <span class="results-txt" id="results-txt"></span>
+      <div class="view-btns">
+        <button class="view-btn active" id="btn-grid" onclick="setView('grid')" title="Grid">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </button>
+        <button class="view-btn" id="btn-list" onclick="setView('list')" title="List">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="18" height="2"/><rect x="3" y="11" width="18" height="2"/><rect x="3" y="18" width="18" height="2"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="products-grid" id="products-grid"></div>
+    <div class="empty-state" id="no-results" style="display:none">
+      <div class="empty-icon">🔍</div>
+      <div class="empty-title">No products found</div>
+      <div class="empty-desc">Try different search terms or filters</div>
+      <button onclick="clearFilters()" class="btn btn-primary">Clear Filters</button>
+    </div>
+  </main>
+</div>
+
+<footer class="footer"><div class="container">
+  <div class="footer-bottom" style="border-top:none;padding:1.5rem 0">
+    <span>© 2025 SajhaMart</span>
+  </div>
+</div></footer>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/products.js"></script>
+</body></html>

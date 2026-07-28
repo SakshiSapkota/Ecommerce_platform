@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Account - SajhaMart</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<nav class="navbar" id="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo">Sajha<span class="ac">Mart</span></a>
+  <div class="nav-links"><a href="index.html" class="nav-link">Home</a><a href="products.html" class="nav-link">Products</a><a href="wishlist.html" class="nav-link">Wishlist</a><a href="orders.html" class="nav-link">Orders</a></div>
+  <div class="nav-actions">
+    <button class="btn-cart" onclick="toggleCart()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span class="cart-badge">0</span></button>
+    <div class="user-menu" id="user-menu">
+      <button class="btn-user" onclick="toggleUserMenu()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="js-user-name">Account</span></button>
+      <div class="user-dropdown" id="user-dropdown">
+        <div class="js-logged-out"><a href="login.html" class="dropdown-item">Sign In</a></div>
+        <div class="js-logged-in" style="display:none"><div class="dropdown-header js-greeting"></div><div class="dropdown-divider"></div><a href="account.html" class="dropdown-item">My Account</a><a href="orders.html" class="dropdown-item">My Orders</a><div class="dropdown-divider"></div><button class="dropdown-item" onclick="logout()">Sign Out</button></div>
+      </div>
+    </div>
+  </div>
+</div></nav>
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<aside class="cart-sidebar" id="cart-sidebar"><div class="cart-head"><h3>Cart</h3><button class="cart-close" onclick="toggleCart()">✕</button></div><div class="cart-body" id="cart-body"></div><div class="cart-empty-box" id="cart-empty"><div class="icon">🛒</div><p>Empty</p></div><div class="cart-foot" id="cart-foot" style="display:none;flex-direction:column;gap:.875rem"><div class="cart-total-row"><span>Total</span><strong id="cart-total">$0</strong></div><a href="checkout.html" class="btn btn-primary btn-full">Checkout</a></div></aside>
+
+<div class="page-hero"><div class="container"><div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>My Account</span></div><h1>My Account</h1><p>Manage your profile and settings</p></div></div>
+
+<div class="container" id="auth-req" style="display:none;text-align:center;padding:4rem 1.5rem">
+  <div style="font-size:3rem;margin-bottom:1rem">🔒</div>
+  <h3 style="margin-bottom:.5rem">Sign in to view your account</h3>
+  <div style="display:flex;gap:.75rem;justify-content:center;margin-top:1.25rem"><a href="login.html" class="btn btn-primary">Sign In</a><a href="register.html" class="btn btn-secondary">Register</a></div>
+</div>
+
+<div id="account-content" style="display:none">
+  <div class="account-layout">
+    <div>
+      <div class="account-nav">
+        <button class="account-nav-item active" onclick="showTab('profile',this)"><span>👤</span> Profile</button>
+        <button class="account-nav-item" onclick="showTab('security',this)"><span>🔒</span> Change Password</button>
+        <a href="orders.html" class="account-nav-item" style="text-decoration:none"><span>📦</span> My Orders</a>
+        <a href="wishlist.html" class="account-nav-item" style="text-decoration:none"><span>💛</span> Wishlist</a>
+        <button class="account-nav-item" style="color:#f43f5e" onclick="showTab('danger',this)"><span>⚠️</span> Danger Zone</button>
+      </div>
+    </div>
+    <div id="tab-area">
+
+      <!-- Profile -->
+      <div id="tab-profile">
+        <div class="page-card">
+          <div class="page-card-title">Profile</div>
+          <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem">
+            <div id="avatar" style="width:72px;height:72px;border-radius:50%;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:1.875rem;font-weight:700;color:#4f46e5">?</div>
+            <div><div style="font-size:1.125rem;font-weight:700" id="pname">-</div><div style="color:var(--text-muted)" id="pemail">-</div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <div style="padding:1rem;background:var(--slate-100);border-radius:var(--radius-lg);text-align:center"><div style="font-size:1.75rem;font-weight:800;color:#4f46e5" id="stat-o">0</div><div style="font-size:.8125rem;color:var(--text-muted)">Orders</div></div>
+            <div style="padding:1rem;background:var(--slate-100);border-radius:var(--radius-lg);text-align:center"><div style="font-size:1.75rem;font-weight:800;color:#10b981" id="stat-w">0</div><div style="font-size:.8125rem;color:var(--text-muted)">Wishlist Items</div></div>
+          </div>
+        </div>
+        <div class="page-card">
+          <div class="page-card-title">Quick Links</div>
+          <div style="display:flex;gap:.75rem;flex-wrap:wrap"><a href="orders.html" class="btn btn-secondary">📦 My Orders</a><a href="wishlist.html" class="btn btn-secondary">💛 Wishlist</a><a href="products.html" class="btn btn-secondary">🛍 Shop</a></div>
+        </div>
+      </div>
+
+      <!-- Change Password -->
+      <div id="tab-security" style="display:none">
+        <div class="page-card">
+          <div class="page-card-title">Change Password</div>
+          <div class="alert alert-error" id="pw-err" style="display:none"></div>
+          <div class="alert alert-success" id="pw-ok" style="display:none"></div>
+          <form id="cpw-form" novalidate>
+            <div class="form-group"><label class="form-label">Current Password</label><div style="position:relative"><input class="form-input" type="password" id="cur-pw" placeholder="Current password" style="padding-right:2.5rem"><button type="button" class="pw-toggle" onclick="togglePasswordVisibility('cur-pw',this)">👁</button></div><span class="form-error-msg" id="e-cpw"></span></div>
+            <div class="form-group"><label class="form-label">New Password</label><div style="position:relative"><input class="form-input" type="password" id="new-pw" placeholder="Min 6 characters" style="padding-right:2.5rem"><button type="button" class="pw-toggle" onclick="togglePasswordVisibility('new-pw',this)">👁</button></div><span class="form-error-msg" id="e-npw"></span></div>
+            <div class="form-group"><label class="form-label">Confirm New Password</label><div style="position:relative"><input class="form-input" type="password" id="con-pw" placeholder="Repeat new password" style="padding-right:2.5rem"><button type="button" class="pw-toggle" onclick="togglePasswordVisibility('con-pw',this)">👁</button></div><span class="form-error-msg" id="e-conpw"></span></div>
+            <button type="submit" class="btn btn-primary">Update Password</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Danger Zone -->
+      <div id="tab-danger" style="display:none">
+        <div class="page-card">
+          <div class="page-card-title">Danger Zone</div>
+          <div style="border:1.5px solid #fecdd3;background:#fff1f2;border-radius:var(--radius-xl);padding:1.5rem">
+            <h3 style="color:#9f1239;font-weight:700;margin-bottom:.5rem">⚠️ Delete Account</h3>
+            <p style="font-size:.9375rem;color:#be123c;margin-bottom:1.25rem">This will permanently delete your account, orders and wishlist. <strong>This cannot be undone.</strong></p>
+            <button class="btn btn-danger" onclick="openDelModal()">Delete My Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal-overlay" id="del-modal">
+  <div class="modal-box" style="max-width:400px">
+    <div class="modal-icon">⚠️</div>
+    <h2>Delete Account?</h2>
+    <p>All your data will be permanently erased.</p>
+    <div class="alert alert-error" id="del-err" style="display:none;margin-top:1rem"></div>
+    <div class="form-group" style="margin-top:1.25rem;text-align:left">
+      <label class="form-label">Enter your password to confirm</label>
+      <div style="position:relative"><input class="form-input" type="password" id="del-pw" placeholder="Your password" style="padding-right:2.5rem"><button type="button" class="pw-toggle" onclick="togglePasswordVisibility('del-pw',this)">👁</button></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeDelModal()">Cancel</button>
+      <button class="btn btn-danger" id="del-btn" onclick="doDelete()">Yes, Delete My Account</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"><div class="container"><div class="footer-bottom" style="border-top:none;padding:1.5rem 0"><span>© 2025 SajhaMart</span></div></div></footer>
+<script src="js/api.js"></script><script src="js/cart.js"></script><script src="js/auth.js"></script>
+<script>
+let acUser = null;
+function showTab(name, btn) {
+  ['profile','security','danger'].forEach(t => document.getElementById('tab-'+t).style.display = t===name?'block':'none');
+  document.querySelectorAll('.account-nav-item').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+async function loadAccount() {
+  const s = await API.get('/api/session');
+  if (!s.loggedIn) { document.getElementById('auth-req').style.display='block'; return; }
+  acUser = s.user;
+  document.getElementById('account-content').style.display='block';
+  const initials = acUser.name.split(' ').map(w=>w[0]).join('').toUpperCase().substring(0,2);
+  document.getElementById('avatar').textContent = initials;
+  document.getElementById('pname').textContent  = acUser.name;
+  document.getElementById('pemail').textContent = acUser.email;
+  const [ords, wl] = await Promise.all([API.get('/api/orders'), API.get('/api/wishlist')]);
+  document.getElementById('stat-o').textContent = (ords.orders||[]).length;
+  document.getElementById('stat-w').textContent = (wl.items||[]).length;
+}
+document.getElementById('cpw-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const errEl=document.getElementById('pw-err'), okEl=document.getElementById('pw-ok');
+  errEl.style.display='none'; okEl.style.display='none';
+  ['e-cpw','e-npw','e-conpw'].forEach(id => document.getElementById(id).textContent='');
+  const cur=document.getElementById('cur-pw').value;
+  const nw=document.getElementById('new-pw').value;
+  const co=document.getElementById('con-pw').value;
+  let ok=true;
+  if (!cur) { document.getElementById('e-cpw').textContent='Required'; ok=false; }
+  if (nw.length<6) { document.getElementById('e-npw').textContent='Min 6 characters'; ok=false; }
+  if (nw!==co) { document.getElementById('e-conpw').textContent='Passwords do not match'; ok=false; }
+  if (!ok) return;
+  const lr = await API.post('/api/login', { email:acUser.email, password:cur });
+  if (!lr.success) { document.getElementById('e-cpw').textContent='Incorrect password'; return; }
+  const fr = await API.post('/api/forgot-password', { email:acUser.email });
+  if (!fr.success||!fr.reset_token) { errEl.textContent='Could not initiate change'; errEl.style.display='flex'; return; }
+  const rr = await API.post('/api/reset-password', { token:fr.reset_token, password:nw, confirm:co });
+  if (rr.success) { okEl.textContent='Password updated! Signing you out…'; okEl.style.display='flex'; document.getElementById('cpw-form').reset(); setTimeout(()=>{ API.post('/api/logout',{}); location.href='login.html'; },2000); }
+  else { errEl.textContent=rr.error||'Failed'; errEl.style.display='flex'; }
+});
+function openDelModal() { document.getElementById('del-modal').classList.add('open'); document.getElementById('del-pw').value=''; document.getElementById('del-err').style.display='none'; }
+function closeDelModal() { document.getElementById('del-modal').classList.remove('open'); }
+async function doDelete() {
+  const pw=document.getElementById('del-pw').value;
+  const errEl=document.getElementById('del-err'), btn=document.getElementById('del-btn');
+  errEl.style.display='none';
+  if (!pw) { errEl.textContent='Password required'; errEl.style.display='flex'; return; }
+  btn.disabled=true; btn.textContent='Deleting…';
+  const r = await API.post('/api/account/delete', { password:pw });
+  if (r.success) { showToast('Account deleted. Goodbye!','success'); setTimeout(()=>location.href='index.html',1200); }
+  else { errEl.textContent=r.error||'Incorrect password'; errEl.style.display='flex'; btn.disabled=false; btn.textContent='Yes, Delete My Account'; }
+}
+document.getElementById('del-modal').addEventListener('click', e => { if(e.target===document.getElementById('del-modal')) closeDelModal(); });
+document.addEventListener('DOMContentLoaded', loadAccount);
+</script>
+</body></html>
