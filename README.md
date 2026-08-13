@@ -40,10 +40,3 @@ Notes: This repo intentionally keeps dependencies minimal. If your environment r
 - [frontend/js/cart.js](frontend/js/cart.js) — cart state and actions.
 - [frontend/css/main.css](frontend/css/main.css) — base styling.
 
-
-If you want, I can:
-- Expand the README with setup steps and dependency management.
-- Add a `requirements.txt` and a simple `run.sh`/`run.ps1` for convenience.
-- Convert backend to use Flask/FastAPI for a more robust API structure.
-
-Happy hacking!
