@@ -53,10 +53,3 @@ Notes: This repo intentionally keeps dependencies minimal. If your environment r
 **License & reuse**
 Use this code freely for learning and prototypes. It’s intentionally minimal — please adapt and improve it however you like.
 
-**Questions or next steps?**
-If you want, I can:
-- Expand the README with setup steps and dependency management.
-- Add a `requirements.txt` and a simple `run.sh`/`run.ps1` for convenience.
-- Convert backend to use Flask/FastAPI for a more robust API structure.
-
-Happy hacking!
