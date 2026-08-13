@@ -40,20 +40,7 @@ Notes: This repo intentionally keeps dependencies minimal. If your environment r
 - [frontend/js/cart.js](frontend/js/cart.js) — cart state and actions.
 - [frontend/css/main.css](frontend/css/main.css) — base styling.
 
-**How it works (brief)**
-- The frontend calls REST-like endpoints exposed by the Python server.
-- APIs in `backend/` read/write simple data files (see `backend/db.py`).
-- File uploads (product images) are placed in `uploads/` and referenced by the frontend.
 
-**Customize & extend**
-- Add a real database (SQLite/Postgres) by replacing `backend/db.py`.
-- Swap the static frontend for a React/Vue app and reuse the backend APIs.
-- Harden auth by integrating a session store or JWTs.
-
-**License & reuse**
-Use this code freely for learning and prototypes. It’s intentionally minimal — please adapt and improve it however you like.
-
-**Questions or next steps?**
 If you want, I can:
 - Expand the README with setup steps and dependency management.
 - Add a `requirements.txt` and a simple `run.sh`/`run.ps1` for convenience.
